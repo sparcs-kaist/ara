@@ -1,0 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# IDEA
+.idea
+
+# Contents
+ara/contents
+
+# Settings
+ara/ara/settings/config/
