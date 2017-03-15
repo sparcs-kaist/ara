@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'apps.core',
     'apps.session',
 ]
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'ara.urls'
@@ -105,18 +107,32 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# https://docs.djangoproject.com/en/1.10/ref/settings/#media-root
+
+MEDIA_URL = '/contents/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, '../contents/')
+
+
+# http://django-debug-toolbar.readthedocs.org/en/1.4/installation.html
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+INTERNAL_IPS = ('127.0.0.1', 'localhost')
