@@ -30,6 +30,19 @@ class Document(MetaInfoModel):
         verbose_name='서명 사용',
     )
 
+    def __str__(self):
+        if self.is_anonymous:
+            return '{summary} - {created_by}'.format(
+                summary=self.summary,
+                created_by='anonymous',
+            )
+
+        else:
+            return '{summary} - {created_by}'.format(
+                summary=self.summary,
+                created_by=self.created_by,
+            )
+
 
 class Article(Document):
     class Meta:
@@ -55,18 +68,9 @@ class Article(Document):
         verbose_name='작성자',
     )
 
-    def __str__(self):
-        if self.is_anonymous:
-            return '{title} - {created_by}'.format(
-                title=self.title[:16],
-                created_by='anonymous',
-            )
-
-        else:
-            return '{title} - {created_by}'.format(
-                title=self.title[:16],
-                created_by=self.created_by,
-            )
+    @property
+    def summary(self):
+        return self.title[:16]
 
 
 class BestArticle(MetaInfoModel):
@@ -102,18 +106,9 @@ class Comment(Document):
         verbose_name='작성자',
     )
 
-    def __str__(self):
-        if self.is_anonymous:
-            return '{content} - {created_by}'.format(
-                content=self.title[:16],
-                created_by='anonymous',
-            )
-
-        else:
-            return '{content} - {created_by}'.format(
-                content=self.title[:16],
-                created_by=self.created_by,
-            )
+    @property
+    def summary(self):
+        return self.content[:16]
 
 
 class BestComment(MetaInfoModel):
