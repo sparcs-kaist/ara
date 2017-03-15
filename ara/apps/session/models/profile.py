@@ -11,13 +11,15 @@ class UserProfile(MetaInfoModel):
     nick = models.CharField(
         unique=True,
         max_length=32,
+        verbose_name='닉네임',
     )
 
     # FK Fields
     user = models.OneToOneField(
         to='auth.User',
         primary_key=True,
-        related_name='profile'
+        related_name='profile',
+        verbose_name='회원 계정',
     )
 
     def __str__(self):
