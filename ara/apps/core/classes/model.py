@@ -21,8 +21,7 @@ class MetaInfoModel(models.Model):
         verbose_name='생성 시간',
     )
     updated_at = models.DateTimeField(
-        null=True,
-        default=None,
+        auto_now=True,
         verbose_name='수정 시간',
     )
     deleted_at = models.DateTimeField(
