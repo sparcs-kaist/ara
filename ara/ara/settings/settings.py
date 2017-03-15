@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
@@ -150,3 +151,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
 }
+
+
+# https://github.com/ottoyiu/django-cors-headers/#setup
+
+CORS_ORIGIN_WHITELIST = (
+    'ara.sparcs.org',
+    'ara.kaist.ac.kr',
+)
