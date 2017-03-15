@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'rest_framework',
+    'rest_framework.authtoken',
     'apps.core',
     'apps.session',
 ]
@@ -136,3 +138,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '../contents/')
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 INTERNAL_IPS = ('127.0.0.1', 'localhost')
+
+
+# http://www.django-rest-framework.org/#installation
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
