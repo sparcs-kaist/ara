@@ -1,0 +1,1 @@
+[{"model": "core.category", "pk": 1, "fields": {"created_at": "2017-03-01T00:00:00", "updated_at": "2017-03-01T00:00:00", "deleted_at": null, "slug": "garbage", "ko_name": "\uac00\ube44\uc9c0", "en_name": "Garbage", "ko_description": "Trash, Garbage, Non-recyclable", "en_description": "Trash, Garbage, Non-recyclable"}}]

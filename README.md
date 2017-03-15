@@ -10,7 +10,7 @@ $ pip install -r requirements.txt
 ```
 
 
-Exports Requirements List
+Export Requirements List
 -------------------------
 
 ```sh
@@ -26,4 +26,14 @@ You can get these files from project master.
 
 ```sh
 $ python manage.py migrate
+```
+
+Dump Fixtures
+-------------------------
+
+```sh
+$ python manage.py loaddata user.json
+$ python manage.py loaddata user_profile.json
+$ python manage.py loaddata category.json
+
 ```
