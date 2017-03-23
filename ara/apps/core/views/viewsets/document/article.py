@@ -3,6 +3,7 @@ from rest_framework import viewsets, permissions
 from apps.core.classes.mixin import DebugModeAuthMixin
 from apps.core.models import Article
 from apps.core.serializers.document.article import ArticleSafeMethodSerializer, ArticleCreateMethodSerializer, ArticleUpdateMethodSerializer
+from apps.core.backends.category import CategoryFilterBackend
 
 
 class ArticleViewSet(DebugModeAuthMixin, viewsets.ModelViewSet):
@@ -13,6 +14,9 @@ class ArticleViewSet(DebugModeAuthMixin, viewsets.ModelViewSet):
         'update': ArticleUpdateMethodSerializer,
         'partial_update': ArticleUpdateMethodSerializer,
     }
+    filter_backends = (
+        CategoryFilterBackend,
+    )
 
     def get_serializer_class(self):
         if self.request.method in permissions.SAFE_METHODS:

@@ -5,12 +5,25 @@ from apps.core.views.viewsets import *
 router = routers.SimpleRouter()
 
 
+# CategoryViewSet
+
 router.register(
     prefix=r'categories',
     viewset=CategoryViewSet,
 )
 
+
+# ArticleViewSet
+
 router.register(
     prefix=r'articles',
+    viewset=ArticleViewSet,
+)
+
+
+# CategoryNestedArticleViewSet
+
+router.register(
+    prefix=r'categories/(?P<category_slugs>[-\w,]+)/articles',
     viewset=ArticleViewSet,
 )
