@@ -10,3 +10,7 @@ ara/contents
 
 # Settings
 ara/ara/settings/config/
+
+#sqlite3
+
+ara/ara/db.sqlite3
