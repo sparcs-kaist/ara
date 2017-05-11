@@ -1,6 +1,7 @@
 import datetime
 
 from django.db import models
+from django.utils import timesince
 
 
 class MetaInfoManager(models.Manager):
@@ -37,3 +38,51 @@ class MetaInfoModel(models.Model):
         self.save()
 
         return self
+
+    @property
+    def since_created_at(self):
+        return self.since_datetime(self.created_at)
+
+    @property
+    def since_updated_at(self):
+        return self.since_datetime(self.updated_at)
+
+    @property
+    def since_deleted_at(self):
+        return self.since_datetime(self.deleted_at)
+
+    @property
+    def display_created_at(self):
+        return self.display_datetime(self.created_at)
+
+    @property
+    def display_updated_at(self):
+        return self.display_datetime(self.updated_at)
+
+    @property
+    def display_deleted_at(self):
+        return self.display_datetime(self.deleted_at)
+
+    @staticmethod
+    def since_datetime(refer_dt):
+        if not refer_dt:
+            return None
+
+        return timesince.timesince(refer_dt).split(",")[0]
+
+    @staticmethod
+    def display_datetime(refer_dt):
+        if not refer_dt:
+            return None
+
+        refer_dt_y, refer_dt_m, refer_dt_d = refer_dt.isocalendar()
+        today_dt_y, today_dt_m, today_dt_d = datetime.date.today().isocalendar()
+
+        if (refer_dt_y, refer_dt_m, refer_dt_d) == (today_dt_y, today_dt_m, today_dt_d):
+            return refer_dt.strftime('%H:%M')
+
+        elif refer_dt_y == today_dt_y:
+            return refer_dt.strftime('%m-%d %H:%M')
+
+        else:
+            return refer_dt.strftime('%y-%m-%d %H:%M')
