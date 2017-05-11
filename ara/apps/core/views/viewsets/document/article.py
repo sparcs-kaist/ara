@@ -1,6 +1,7 @@
 from rest_framework import viewsets, permissions
 
 from apps.core.classes.mixin import DebugModeAuthMixin
+from apps.core.classes.pagination import PageNumberPagination
 from apps.core.models import Article
 from apps.core.serializers.document.article import ArticleSafeMethodSerializer, ArticleCreateMethodSerializer, ArticleUpdateMethodSerializer
 from apps.core.backends.category import CategoryFilterBackend
@@ -8,6 +9,7 @@ from apps.core.backends.category import CategoryFilterBackend
 
 class ArticleViewSet(DebugModeAuthMixin, viewsets.ModelViewSet):
     queryset = Article.objects.select_related('created_by').prefetch_related('comments', 'categories')
+    pagination_class = PageNumberPagination
     safe_method_serializer_class = ArticleSafeMethodSerializer
     unsafe_method_serializer_class = {
         'create': ArticleCreateMethodSerializer,
