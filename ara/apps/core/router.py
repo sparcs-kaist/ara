@@ -43,3 +43,8 @@ router.register(
     prefix=r'articles/(?P<article_id>\d+)/update_logs',
     viewset=DocumentUpdateLogViewSet,
 )
+# CommentViewSet
+router.register(
+    prefix=r'articles/(?P<num>[0-9]+)/comments',
+    viewset=CommentViewSet,
+)
