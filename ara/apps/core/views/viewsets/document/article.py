@@ -10,7 +10,14 @@ from apps.core.backends.category import CategoryFilterBackend
 
 
 class ArticleViewSet(DebugModeAuthMixin, viewsets.ModelViewSet):
-    queryset = Article.objects.select_related('created_by').prefetch_related('comments', 'categories')
+    queryset = Article.objects.select_related(
+        'created_by',
+    ).prefetch_related(
+        'votes',
+        'comments',
+        'categories',
+        'update_logs',
+    )
     pagination_class = PageNumberPagination
     safe_method_serializer_class = ArticleSafeMethodSerializer
     unsafe_method_serializer_class = {
