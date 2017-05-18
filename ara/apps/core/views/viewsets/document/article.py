@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets
 
 from apps.core.classes.mixin import DebugModeAuthMixin
 from apps.core.classes.pagination import PageNumberPagination
@@ -21,11 +21,10 @@ class ArticleViewSet(DebugModeAuthMixin, viewsets.ModelViewSet):
     )
 
     def get_serializer_class(self):
-        if self.request.method in permissions.SAFE_METHODS:
-            return self.safe_method_serializer_class
-
-        else:
+        if self.action in self.unsafe_method_serializer_class.keys():
             return self.unsafe_method_serializer_class[self.action]
+
+        return self.safe_method_serializer_class
 
     def perform_create(self, serializer):
         serializer.save(
