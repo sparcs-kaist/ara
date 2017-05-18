@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from apps.core.models import Article, DocumentVote
 from apps.core.serializers.category import CategorySerializer
+from apps.core.serializers.document.update_log import DocumentUpdateLogSerializer
 
 
 class ArticleSafeMethodSerializer(serializers.ModelSerializer):
@@ -16,6 +17,9 @@ class ArticleSafeMethodSerializer(serializers.ModelSerializer):
 
     votes = serializers.SerializerMethodField()
     categories = CategorySerializer(
+        many=True,
+    )
+    update_logs = DocumentUpdateLogSerializer(
         many=True,
     )
 
