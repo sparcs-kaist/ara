@@ -28,9 +28,18 @@ router.register(
     viewset=ArticleViewSet,
 )
 
+
 # ArticleNestedDocumentVoteViewSet
 
 router.register(
     prefix=r'articles/(?P<article_id>\d+)/votes',
     viewset=DocumentVoteViewSet,
+)
+
+
+# ArticleNestedDocumentUpdateLogViewSet
+
+router.register(
+    prefix=r'articles/(?P<article_id>\d+)/update_logs',
+    viewset=DocumentUpdateLogViewSet,
 )
