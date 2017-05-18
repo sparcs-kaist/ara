@@ -1,8 +1,10 @@
+from django.db import transaction
+
 from rest_framework import viewsets
 
 from apps.core.classes.mixin import DebugModeAuthMixin
 from apps.core.classes.pagination import PageNumberPagination
-from apps.core.models import Article
+from apps.core.models import Article, DocumentUpdateLog
 from apps.core.serializers.document.article import ArticleSafeMethodSerializer, ArticleCreateMethodSerializer, ArticleUpdateMethodSerializer
 from apps.core.backends.category import CategoryFilterBackend
 
@@ -30,3 +32,16 @@ class ArticleViewSet(DebugModeAuthMixin, viewsets.ModelViewSet):
         serializer.save(
             created_by=self.request.user.profile,
         )
+
+    def perform_update(self, serializer):
+        article = self.get_object()
+
+        update_log = DocumentUpdateLog(
+            previous_document=ArticleSafeMethodSerializer(article).data,
+            created_on=article,
+        )
+
+        with transaction.atomic():
+            super(ArticleViewSet, self).perform_update(serializer=serializer)
+
+            update_log.save()
