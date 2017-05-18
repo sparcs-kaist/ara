@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.core.models import Article
+from apps.core.models import Article, DocumentVote
 from apps.core.serializers.category import CategorySerializer
 
 
@@ -14,6 +14,7 @@ class ArticleSafeMethodSerializer(serializers.ModelSerializer):
             'deleted_at',
         )
 
+    votes = serializers.SerializerMethodField()
     categories = CategorySerializer(
         many=True,
     )
@@ -24,6 +25,14 @@ class ArticleSafeMethodSerializer(serializers.ModelSerializer):
     display_created_at = serializers.ReadOnlyField()
     display_updated_at = serializers.ReadOnlyField()
     display_deleted_at = serializers.ReadOnlyField()
+
+    def get_votes(self, obj):
+        votes = DocumentVote.objects.filter(created_on=obj)
+
+        return {
+            'up': votes.filter(is_up=True).count(),
+            'down': votes.filter(is_up=False).count(),
+        }
 
 
 class ArticleCreateMethodSerializer(serializers.ModelSerializer):
