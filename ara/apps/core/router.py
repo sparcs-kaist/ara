@@ -24,6 +24,13 @@ router.register(
 # CategoryNestedArticleViewSet
 
 router.register(
-    prefix=r'categories/(?P<category_slugs>[-\w,]+)/articles',
+    prefix=r'categories/(?P<category_id>\d+)/articles',
     viewset=ArticleViewSet,
+)
+
+# ArticleNestedDocumentVoteViewSet
+
+router.register(
+    prefix=r'articles/(?P<article_id>\d+)/votes',
+    viewset=DocumentVoteViewSet,
 )
