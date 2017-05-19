@@ -40,6 +40,7 @@ class CommentCreateMethodSerializer(serializers.ModelSerializer):
         exclude = (
             'created_by',
             'created_on',
+            'is_comment'
         )
         read_only_fields = (
             'created_at',
