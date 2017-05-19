@@ -31,12 +31,16 @@ class CommentViewSet(DebugModeAuthMixin, viewsets.ModelViewSet):
         if(self.kwargs['comment_no']):           
             comment_no=int(self.kwargs['comment_no'])
             parent_document = Document.objects.get(id=comment_no)
+            if parent_docuemt.is_comment:        
+                printf("error: make article-comment request on comment. ");
             is_comment = false
         else:
             article_no = int(self.kwargs['article_no'])
             parent_document = Document.objects.get(id=article_no)
-            if parent_docuemt.is_comment:
+            if not parent_docuemt.is_comment:
+                printf("error: make comment-comment request on article. ");
             is_comment = true
+
         serializer.save(
             created_by=self.request.user.profile,
             created_on=parent_document,
