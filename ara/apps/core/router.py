@@ -45,6 +45,13 @@ router.register(
 )
 # CommentViewSet
 router.register(
-    prefix=r'articles/(?P<num>[0-9]+)/comments',
+    prefix=r'articles/(?P<article_no>[0-9]+)/comments',
     viewset=CommentViewSet,
 )
+
+router.register(
+    prefix=r'articles/(?P<article_no>[0-9]+)/comments/(?P<comment_no>[0-9]+)/comments',
+    viewset=CommentViewSet
+)
+
+

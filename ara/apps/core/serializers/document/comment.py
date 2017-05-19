@@ -55,9 +55,12 @@ class CommentUpdateMethodSerializer(serializers.ModelSerializer):
             'created_by',
             'is_anonymous',
             'use_signature',
+            'created_on',
         )
         read_only_fields = (
             'created_at',
             'updated_at',
             'deleted_at',
         )
+
+

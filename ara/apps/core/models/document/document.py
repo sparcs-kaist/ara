@@ -11,6 +11,12 @@ class Document(MetaInfoModel):
     content = models.TextField(
         verbose_name='본문',
     )
+  
+    is_comment = models.BooleanField(
+        default=False,
+        verbose_name='댓글',
+    )
+ 
 
     # Meta Fields
     is_anonymous = models.BooleanField(

@@ -26,10 +26,23 @@ class CommentViewSet(DebugModeAuthMixin, viewsets.ModelViewSet):
             return self.unsafe_method_serializer_class[self.action]
 
     def perform_create(self, serializer):
-    
-        article_no = int(self.kwargs['num'])
-        parent_document = Document.objects.get(id=article_no)
+        #article_no = int(self.kwargs['article_no'])
+        #parent_document = Document.objects.get(id=article_no)
+        if(self.kwargs['comment_no']):           
+            comment_no=int(self.kwargs['comment_no'])
+            parent_document = Document.objects.get(id=comment_no)
+            is_comment = false
+        else:
+            article_no = int(self.kwargs['article_no'])
+            parent_document = Document.objects.get(id=article_no)
+            if parent_docuemt.is_comment:
+            is_comment = true
         serializer.save(
             created_by=self.request.user.profile,
             created_on=parent_document,
+            is_comment = is_comment,
         )
+    
+       
+        
+
